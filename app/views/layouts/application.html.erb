@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Coffeehub</title>
+  <!-- Add meta tags, favicon, etc. -->
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <!-- Add Bootstrap CSS -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  <!-- Add your custom CSS here (if any) -->
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_importmap_tags %>
+</head>
+<body>
+  <!-- Create the navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <!-- Navbar brand or logo (if you have one) -->
+      <a class="navbar-brand" href="/">Coffee Hub</a>
+
+      <!-- Navbar items -->
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/orders/new">Create Order</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/orders">Orders</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/discounts">Discounts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/items">Items</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <% if flash[:notice].present? %>
+    <div id="flash-message" class="alert alert-success m-2">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div id="flash-message" class="alert alert-danger m-2">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <!-- Yield the content of the views -->
+  <div id="app" class="container mt-4">
+    <%= yield %>
+  </div>
+
+</body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const flashMessage = document.getElementById('flash-message');
+
+    // Function to remove the flash message after 10 seconds
+    const removeFlashMessage = () => {
+      if (flashMessage) {
+        flashMessage.remove();
+      }
+    };
+
+    // Set a timer to remove the flash message after 10 seconds
+    setTimeout(removeFlashMessage, 10000); // 10000 milliseconds = 10 seconds
+  });
+</script>
+</html>

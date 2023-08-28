@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h3>Create New Item</h3>
+  <%= form_with model: @item, url: items_path, class: "form-control m-3 w-50" do |form| %>
+    <div>
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+      <% if @item.errors.has_key?(:name) %>
+        <p class="text-danger">
+          <%= @item.errors[:name].first %>
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :price, class: "form-label" %>
+      <%= form.number_field :price, step: "0.01", class: "form-control" %>
+      <% if @item.errors.has_key?(:price) %>
+        <p class="text-danger">
+          <%= @item.errors[:price].first %>
+        </p>
+      <% end %>
+    </div>
+    <div>
+      <%= form.label :tax_rate, class: "form-label" %>
+      <small>(Tax rate should greater than 0 and less than 100)</small>
+      <%= form.number_field :tax_rate, step: "0.01", class: "form-control" %>
+      <% if @item.errors.has_key?(:tax_rate) %>
+        <p class="text-danger">
+          <%= @item.errors[:tax_rate].first %>
+        </p>
+      <% end %>
+    </div>
+
+    <div class="m-2">
+      <%= form.submit "Create Item", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

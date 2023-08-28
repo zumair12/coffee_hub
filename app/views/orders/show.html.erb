@@ -1,0 +1,42 @@
+<div class="container mt-4">
+
+  <h4>Order</h4>
+  <div class="d-flex">
+    <div class="m-2 fw-bold">
+      <p>id:</p>
+      <p>State:</p>
+    </div>
+    <div class="m-2">
+      <p> <%= @order.id %></p>
+      <p id="<%= "order-state-#{@order.id}"%>"> <%= @order.state %></p>      
+    </div>
+  </div>
+  <h4>Order Items</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Sr</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Taxable Amount</th>
+        <th>Payable</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each_with_index do |item, index| %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= item.item.name.titleize %></td>
+          <td><%= item.quantity %></td>
+          <td><%= number_to_currency(item.price) %></td>
+          <td><%= number_to_currency(item.discount) %></td>
+          <td><%= number_to_currency(item.taxable_amount) %></td>
+          <td><%= number_to_currency(item.payable) %></td>
+        </tr>
+      <% end %>
+      <%= render 'order_row', order: @order %>
+    </tbody>
+  </table>
+</div>

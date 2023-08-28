@@ -1,0 +1,27 @@
+<!-- views/items/index.html.erb -->
+<div class="container mt-4">
+  <h1>Items</h1>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Tax Rate</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td><%= item.name %></td>
+          <td><%= number_to_currency(item.price) %></td>
+          <td><%= number_to_percentage(item.tax_rate, precision: 2) %></td>
+          <td><%= button_to "Delete", item_path(item), method: :delete, data: { confirm: 'Are you sure you want to delete this item?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div>
+    <a class="btn btn-secondary" href="/items/new">Create Item</a>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+.navbar-nav .nav-link.active {
+  color: #ff0000; /* Set the desired active link color */
+}

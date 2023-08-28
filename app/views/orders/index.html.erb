@@ -1,0 +1,37 @@
+<div class="container mt-4">
+  <h1>Orders</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Customer Contact</th>
+        <th>Order Type</th>
+        <th>State</th>
+        <th>Price</th>
+        <th>Discount</th>
+        <th>Payable</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.customer_name.titleize %></td>
+          <td><%= order.customer_contact %></td>
+          <td><%= Order.order_types[order.order_type] %></td>
+          <td id="<%= "order-state-#{order.id}"%>"><%= order.state.titleize %></td>
+          <td><%= number_to_currency(order.price) %></td>
+          <td><%= number_to_currency(order.discount) %></td>
+          <td><%= number_to_currency(order.payable) %></td>
+          <td><%= link_to 'View Items', order_path(order), class: "btn btn-secondary" %></td>
+          <td><%= button_to "Delete", order_path(order), method: :delete, data: { confirm: 'Are you sure you want to delete this order?' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+</div>
